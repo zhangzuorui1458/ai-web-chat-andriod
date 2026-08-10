@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6DB3F8"/>
+      <stop offset="1" stop-color="#2F5BC0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- App icon background -->
+  <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+
+  <!-- soft clouds -->
+  <g fill="#FFFFFF" opacity="0.18">
+    <circle cx="180" cy="260" r="60"/>
+    <circle cx="250" cy="240" r="44"/>
+    <circle cx="850" cy="330" r="50"/>
+    <circle cx="905" cy="310" r="36"/>
+  </g>
+
+  <!-- ============ PLANE ============ -->
+  <g>
+    <!-- tail fin -->
+    <path d="M268 640 L196 500 Q188 482 210 482 L276 482 L336 630 Z" fill="#FFFFFF"/>
+    <path d="M236 560 L210 505 L246 505 L272 560 Z" fill="#2F5BC0" opacity="0.9"/>
+
+    <!-- fuselage -->
+    <path d="M168 692 Q168 624 330 614 L724 602 Q884 602 884 682 Q884 762 724 766 L330 770 Q168 766 168 692 Z" fill="#FFFFFF"/>
+    <!-- belly shade -->
+    <path d="M180 716 Q230 768 340 770 L720 766 Q830 760 872 706 Q850 792 720 800 L340 800 Q210 794 180 716 Z" fill="#D9E7FA"/>
+
+    <!-- wing -->
+    <path d="M440 766 L338 884 Q324 902 354 902 L492 902 L600 768 Z" fill="#FFFFFF"/>
+    <path d="M600 768 L492 902 L440 902 L540 768 Z" fill="#D9E7FA"/>
+
+    <!-- cockpit window -->
+    <path d="M758 626 Q842 634 862 672 Q800 666 750 656 Q744 636 758 626 Z" fill="#2F5BC0"/>
+
+    <!-- passenger windows -->
+    <circle cx="468" cy="684" r="17" fill="#2F5BC0"/>
+    <circle cx="552" cy="681" r="17" fill="#2F5BC0"/>
+    <circle cx="636" cy="678" r="17" fill="#2F5BC0"/>
+  </g>
+
+  <!-- ============ CROW ============ -->
+  <g>
+    <!-- raised wing: clean swept crescent -->
+    <path d="M455 540 Q410 400 300 350 Q262 334 272 372 Q300 470 380 540 Q420 566 455 540 Z" fill="#15181F"/>
+
+    <!-- small tucked tail -->
+    <path d="M405 590 Q350 620 322 668 Q314 684 332 678 L418 640 Q432 610 424 588 Z" fill="#15181F"/>
+
+    <!-- body -->
+    <path d="M392 620 Q352 520 392 428 Q434 334 540 334 Q648 334 668 440 Q682 528 632 596 Q580 652 498 652 Q432 652 392 620 Z" fill="#22262F"/>
+
+    <!-- chest highlight -->
+    <path d="M420 560 Q416 480 460 428 Q446 500 470 570 Q445 574 420 560 Z" fill="#31363F" opacity="0.8"/>
+
+    <!-- eye -->
+    <circle cx="556" cy="432" r="34" fill="#FFFFFF"/>
+    <circle cx="564" cy="436" r="17" fill="#15181F"/>
+    <circle cx="570" cy="430" r="6" fill="#FFFFFF"/>
+
+    <!-- beak -->
+    <path d="M604 452 L700 470 Q716 474 706 486 L612 502 Q596 478 604 452 Z" fill="#F5A623"/>
+
+    <!-- feet gripping fuselage -->
+    <path d="M470 650 q-6 18 4 24 M500 652 q-4 18 6 22" stroke="#F5A623" stroke-width="12" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- ============ LETTER (held at beak tip) ============ -->
+  <g transform="rotate(8 745 500)">
+    <rect x="668" y="452" width="150" height="104" rx="12" fill="#FFFFFF"/>
+    <path d="M674 464 L743 518 L812 464" stroke="#2F5BC0" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

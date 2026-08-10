@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+（API 31+）：让系统 SplashScreen 也用白色背景，
+     避免应用图标深色背景在启动时露出"黑框"。 -->
+<resources>
+    <style name="Theme.WebChat" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#1E1E2E</item>
+        <item name="colorPrimaryDark">@color/status_bar</item>
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <!-- SplashScreen：白色背景，避免自适应图标深色 background 在启动期露出 -->
+        <item name="android:windowSplashScreenBackground">@android:color/white</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/white</item>
+    </style>
+</resources>

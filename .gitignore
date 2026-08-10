@@ -1,0 +1,16 @@
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+captures/
+.cxx/
+
+# 签名相关：禁止入库
+keystore.properties
+*.jks
+*.keystore
+
+# 备份目录与垃圾文件（禁止入库）
+*.bak/
+nul
