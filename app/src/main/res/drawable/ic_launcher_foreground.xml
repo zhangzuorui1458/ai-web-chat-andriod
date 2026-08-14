@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 自适应图标前景：将 logo.png 居中放置在 108dp 画布的安全区内（约 72dp）。 -->
+<!-- 前景层：logo 满铺整个 108dp 画布（不再缩到 72dp），
+     背景层同色兜底，无深色边、无白边、内容完整。 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:width="72dp"
-        android:height="72dp"
+        android:width="108dp"
+        android:height="108dp"
         android:gravity="center"
         android:drawable="@drawable/logo" />
 </layer-list>

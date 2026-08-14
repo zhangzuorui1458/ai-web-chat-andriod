@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     /** 启动闪屏（白底 + logo + "送信鸦"），WebView 首页加载完成后移除 */
     private View splashView;
+    /** 状态栏占位条，颜色跟随前端主题动态变化 */
+    private View statusBarSpacer;
     /** 当前未读消息数（用于设置启动器图标角标） */
     private int badgeCount = 0;
 
@@ -74,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
         // API 35（Android 15）默认强制 edge-to-edge，setDecorFitsSystemWindows 在部分
         // 机型上无效，WebView 会延伸到状态栏下方遮挡顶部。这里用物理占位方案：
-        // root 用垂直 LinearLayout，第一个子 View 为状态栏高度的黑色占位条，
+        // root 用垂直 LinearLayout，第一个子 View 为状态栏高度的占位条（颜色跟随主题），
         // 第二个子 View 才是真正的 FrameLayout 内容容器，整体内容随之下移。
-        View statusBarSpacer = new View(this);
-        statusBarSpacer.setBackgroundColor(Color.BLACK);
+        statusBarSpacer = new View(this);
+        statusBarSpacer.setBackgroundColor(Color.parseColor("#1E1E2E"));
         statusBarSpacer.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
 
@@ -473,6 +475,51 @@ public class MainActivity extends AppCompatActivity {
         public void requestNotificationPermission() {
             runOnUiThread(MainActivity.this::ensureNotificationPermission);
         }
+
+        /** 设置状态栏背景色（跟随前端主题）。
+         *  @param color 十六进制颜色字符串，如 "#000000" 或 "#F5F5F7" */
+        @JavascriptInterface
+        public void setStatusBarColor(String color) {
+            runOnUiThread(() -> MainActivity.this.applyStatusBarColor(color));
+        }
+    }
+
+    /** 根据前端传入的颜色值同时更新状态栏颜色和占位条颜色，
+     *  使状态栏区域与前端主题完全一致。
+     *  同时根据背景亮度自动切换状态栏文字颜色（浅色背景→深色文字，深色背景→浅色文字）。 */
+    private void applyStatusBarColor(String colorStr) {
+        if (colorStr == null || colorStr.isEmpty()) return;
+        try {
+            int color = Color.parseColor(colorStr);
+            // 设置系统状态栏颜色
+            getWindow().setStatusBarColor(color);
+            // 同步更新占位条背景色
+            if (statusBarSpacer != null) {
+                statusBarSpacer.setBackgroundColor(color);
+            }
+            // 根据背景亮度自动切换状态栏文字颜色：
+            // 浅色背景（如白天模式 #F5F5F7）→ 深色文字，深色背景（如黑夜模式 #000000）→ 浅色文字
+            boolean isLightBg = isLightColor(color);
+            int flags = getWindow().getDecorView().getSystemUiVisibility();
+            if (isLightBg) {
+                // API 23+：设置状态栏文字为深色
+                flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            } else {
+                // 移除深色文字标志，恢复默认浅色文字
+                flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            }
+            getWindow().getDecorView().setSystemUiVisibility(flags);
+        } catch (IllegalArgumentException ignore) {
+        }
+    }
+
+    /** 判断颜色是否为浅色（用于决定状态栏文字深浅）。
+     *  使用 W3C 标准亮度公式：L = 0.299*R + 0.587*G + 0.114*B，>160 视为浅色。 */
+    private boolean isLightColor(int color) {
+        double luminance = 0.299 * Color.red(color)
+                         + 0.587 * Color.green(color)
+                         + 0.114 * Color.blue(color);
+        return luminance > 160;
     }
 
     @Override
